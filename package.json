@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.4.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-static": "^4.2.7",
+    "googleapis": "^61.0.0",
+    "opusscript": "0.0.7",
+    "youtube-search": "^1.1.4",
     "ytdl-core": "^3.4.2"
   }
 }

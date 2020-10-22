@@ -2,12 +2,19 @@ const discord = require(`discord.js`);
 const { filterFormats } = require('ytdl-core');
 const bot = new discord.Client();
 
+//const google = require(`googleapis`);
+//const youtube = google.Auth.LoginTicket({version: `v3`, auth: `AIzaSyDY4LwGcIIE34WOW_J4ppuy6fXWKg9dwDo`})
+
 const ytdl = require(`ytdl-core`)
 //const youtube = require("youtube-search")
 
-const config = require('./config.json')
+const config = require('./config.json');
+const search = require('youtube-search');
+var opts = {
+    maxResults: 10,
+    key: 'AIzaSyDY4LwGcIIE34WOW_J4ppuy6fXWKg9dwDo'
+  };
 
-var servers = {}
 
 bot.on('ready', () =>{
     console.log('dziala');
@@ -100,7 +107,7 @@ bot.on('message', async msg=>{
                     break;
                 }
             }
-            case 'insoj':
+        case 'insoj':
             if(!msg.member.hasPermission("MANAGE_ROLES")){
                 msg.channel.send("Nie masz uprawnień do tej komendy");
                 return;
@@ -126,7 +133,7 @@ bot.on('message', async msg=>{
                 }
             }                    
             
-            case 'open':
+        case 'open':
                 if(!msg.member.hasPermission("MANAGE_ROLES")){
                     msg.channel.send("Nie masz uprawnień do tej komendy");
                     return;
@@ -146,7 +153,8 @@ bot.on('message', async msg=>{
                         member.roles.add("611532509452304385");//p
                         member.roles.add("611521055856787456");//przyjaciele                 
                     }
-                break;  }
+                break;  
+            }
 
         case 'declan':
             if(!msg.member.hasPermission("MANAGE_ROLES")){
@@ -244,7 +252,8 @@ bot.on('message', async msg=>{
                     setTimeout(soczek, 10000);
                     setTimeout(pokawie, 600000); 
                     break;
-                    case `whisky`:
+
+        case `whisky`:
                     
                     
                         var nazwa= msg.member.displayName;  
@@ -272,21 +281,20 @@ bot.on('message', async msg=>{
                         filter: 'audioonly' 
                     });
                 }else{
-                    msg.channel.send("Podaj link (WIP)")
-                    /*async function searchYouTubeAsync(args) {
-                        var video = await youtube..search(args.toString().replace(/,/g,' '));
-                        console.log(video.url);
-                        console.log(typeof String(video.url));
-                        return String(video.url);
-                      }
-                      msg.member.voice.channel.join().then(connection => {
-                        const stream = ytdl(searchYouTubeAsync(arg).toString(), { filter: 'audioonly' });
-                        const dispatcher = connection.playStream(stream);
-                
+                    const szukaj= arg[0]+" "+arg[1]+" "+arg[2]+" "+arg[3]+" "+arg[4]+" "+arg[5]+" "+arg[6]+" "+arg[7]+" "+arg[8]+" "+arg[9]+" "+arg[10]+" "+arg[11]+" "+arg[12]+" "+arg[13]
+                    console.log(arg.toString())
+                    search(arg.toString(), opts, function(err, results) {     
+                        console.log(results[0].link)
+                        const wynik = results[0].link
+                        msg.member.voice.channel.join()
+                        const dispatcher = connection.play(ytdl(wynik));    
                         dispatcher.on('end', () => voiceChannel.leave());
-                      })*/
-
+                    }) 
                 }
+                break
+        case `vol`:
+                    
+            
                     
 
 
