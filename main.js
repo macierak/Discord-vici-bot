@@ -16,12 +16,14 @@ var opts = {
   };
 
 
+  
 bot.on('ready', () =>{
     console.log('dziala');
     bot.user.setPresence({
-        activity: { type: "LISTENING", name: "tych pierdół na pogaduchach"},
-        status: "idle"
+        activity: { type: "WATCHING", name:"Upgrade bota"},
+        status: "online"
     })
+    
 })
 
 bot.on("guildMemberAdd", newbie => {
@@ -29,6 +31,8 @@ bot.on("guildMemberAdd", newbie => {
 })
 
 bot.on('message', async msg=>{
+
+    
 
     if(msg.content === "Solo flawless"){
         msg.channel.send("Mountaintopik, Gilotynka, Solo flawless")
@@ -39,7 +43,14 @@ bot.on('message', async msg=>{
     if(msg.content=== ".help"){
         msg.channel.send("Spieprzaj Głuptak")
     }
-
+    if(msg.content.startsWith("Witaj") ){
+        if (msg.member.voice.channel) {
+            const connection = await msg.member.voice.channel.join();
+            const dispatcher = connection.play(`./Witaj.mp3`);
+            
+        }
+        msg.channel.send("Dzielny strażniku!")
+    }
 
     if (!msg.content.startsWith(config.prefix)) return;
     const arg = msg.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -274,32 +285,59 @@ bot.on('message', async msg=>{
                 //-----------------Napoje-----------------//
                 //------------------------------Muzyka----------------------------------//
         case `play` :
-                    const connection = await msg.member.voice.channel.join();
+            //const connection = await msg.member.voice.channel.join();    
                 if(arg[0].startsWith(`https://www.`)){
                     console.log(arg[0])
-                    const dispatcher = connection.play(ytdl(arg[0]),{
-                        filter: 'audioonly' 
-                    });
+                    const connection = await msg.member.voice.channel.join();
+                        const dispatcher = connection.play(ytdl(arg[0]),{
+                            filter: 'audioonly' 
+                        });
                 }else{
                     const szukaj= arg[0]+" "+arg[1]+" "+arg[2]+" "+arg[3]+" "+arg[4]+" "+arg[5]+" "+arg[6]+" "+arg[7]+" "+arg[8]+" "+arg[9]+" "+arg[10]+" "+arg[11]+" "+arg[12]+" "+arg[13]
                     console.log(arg.toString())
-                    search(arg.toString(), opts, function(err, results) {     
+                    search(arg.toString(), opts, async function(err, results) {     
                         console.log(results[0].link)
                         const wynik = results[0].link
-                        msg.member.voice.channel.join()
-                        const dispatcher = connection.play(ytdl(wynik));    
+                        
+                        const connection = await msg.member.voice.channel.join();
+                        const dispatcher = connection.play(ytdl(wynik),{
+                            filter: 'audioonly' 
+                        });    
                         dispatcher.on('end', () => voiceChannel.leave());
                     }) 
                 }
                 break
         case `vol`:
-                    
-            
+            const connection = await msg.member.voice.channel.join();
+            connection.dispatcher.setVolume(arg[0])
+            break;
+        case `stop`:
+            if(1){
+            const connection = await msg.member.voice.channel.join();
+            connection.dispatcher.end()
+            }
+            break;
+        case `resume`:
+            if(1){
+                const connection = await msg.member.voice.channel.join();
+                connection.dispatcher.pause()
+            }
+            break
+                   
+        case `resume`:
+            if(1){
+                const connection = await msg.member.voice.channel.join();
+                connection.dispatcher.resume()
+               }
+            break
+                      
                     
 
 
     }
 })
+
+
 
 bot.login(config.token);
 
