@@ -1,8 +1,12 @@
-# Discord-vici-bot
-Bot napisany w Javascript nadaj¹cy rangi, zmieniaj¹cy nicki osób oraz puszczaj¹cych muzykê
+# Discord [VICI] bot
+Bot napisany w jÄ™zyku Javascript nadajÄ…cy rangi, zmieniajÄ…cy nicki osÃ³b oraz puszczajÄ…cych muzykÄ™ \n
 
-Prefix - Domyœlnie "vici!"
+Prefix - DomyÅ›lnie "vici!"
+
 Komendy:
-    inclan/declan/insoj/open - Nadaje odpowiedni zestaw rang nowym osobom
-    kawa/herbata/soczek/piwo - Dopisuje odpowiedni¹ ikonkê przed nickiem u¿ytkownika
-    play/stop/resume/pause   - Kontrolki muzyczne bota
+
+inclan/declan/insoj/open - Nadaje odpowiedni zestaw rang nowym osobom;
+
+kawa/herbata/soczek/piwo - Dopisuje odpowiedniÄ… ikonkÄ™ przed nickiem uÅ¼ytkownika;
+
+play/stop/resume/pause   - Kontrolki muzyczne bota;
