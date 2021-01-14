@@ -2,11 +2,7 @@ const discord = require(`discord.js`);
 const { filterFormats } = require('ytdl-core');
 const bot = new discord.Client();
 
-//const google = require(`googleapis`);
-//const youtube = google.Auth.LoginTicket({version: `v3`, auth: `AIzaSyDY4LwGcIIE34WOW_J4ppuy6fXWKg9dwDo`})
-
 const ytdl = require(`ytdl-core`)
-//const youtube = require("youtube-search")
 
 const config = require('./config.json');
 const search = require('youtube-search');
@@ -27,7 +23,7 @@ bot.on('ready', () =>{
 })
 
 bot.on("guildMemberAdd", newbie => {
-    newbie.user.send("Witaj na serwerze klanu Aeternum Vivt! zapoznaj się z regulaminem i daj znać do kogoś z rangą Boss lub Rekruter ;) ")
+    newbie.user.send("Witaj na serwerze klanu Aeternum Vivt! zapoznaj się z regulaminem i daj znać komuś z rangą Boss lub Rekruter ;) ")
 })
 
 bot.on('message', async msg=>{
@@ -293,7 +289,7 @@ bot.on('message', async msg=>{
                             filter: 'audioonly' 
                         });
                 }else{
-                    const szukaj= arg[0]+" "+arg[1]+" "+arg[2]+" "+arg[3]+" "+arg[4]+" "+arg[5]+" "+arg[6]+" "+arg[7]+" "+arg[8]+" "+arg[9]+" "+arg[10]+" "+arg[11]+" "+arg[12]+" "+arg[13]
+                    
                     console.log(arg.toString())
                     search(arg.toString(), opts, async function(err, results) {     
                         console.log(results[0].link)
@@ -317,7 +313,7 @@ bot.on('message', async msg=>{
             connection.dispatcher.end()
             }
             break;
-        case `resume`:
+        case `pause`:
             if(1){
                 const connection = await msg.member.voice.channel.join();
                 connection.dispatcher.pause()
